@@ -212,6 +212,9 @@ func (o *nameReferenceTransformer) getNewNameFunc(
 	target resid.Gvk,
 	referralCandidates resmap.ResMap) func(in interface{}) (interface{}, error) {
 	return func(in interface{}) (interface{}, error) {
+		if in == nil {
+			return nil, nil
+		}
 		switch thing := in.(type) {
 		case string:
 			return o.getSimpleNameField(thing, referrer, target,
